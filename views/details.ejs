@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header')%>
+<body>
+    <div class="contnt1">
+        <div class="details">
+            <a>
+                <h1 class="title">Title: <%= blog.title%></h1>
+                <p class="snippet">Snippet: <%= blog.snippet%></p>
+                <p class="body">Body: <%= blog.body%></p>
+            </a>
+            <button class="delete"><img src="/bin.svg" alt=""></button>
+        </div>
+        <a href="/edit/<%= blog._id%>"><button class="edt">Edit</button></a>
+        
+    </div> 
+    <script>
+        const btn = document.querySelector('.delete')
+        btn.addEventListener('click',async (e)=>{
+            e.preventDefault()
+
+            fetch('/blogs/<%= blog._id%>',{
+                method:'DELETE'
+            })
+            window.location.href = '/blogs'
+        })
+    </script>
+</body>
+<%- include('./partials/footer')%>
+</html>

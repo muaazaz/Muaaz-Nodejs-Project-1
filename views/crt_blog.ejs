@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+
+    <body>
+        <form>
+            <label for="title"><i class="arrow right"></i>Title:</label>
+            <input type="text" name="title" id="title" placeholder="title">
+            <label for="snippet"><i class="arrow right"></i>Snippet:</label>
+            <input type="text" id="snippet" name="snippet" placeholder="snippet">
+            <label for="body"><i class="arrow right"></i>Body:</label>
+            <textarea name="body" id="body"></textarea>
+            <input type="text" hidden="true" name="owner" value="<%= user._id%>">
+            <button class="btn">Submit</button>
+        </form>
+
+        <script>
+            const form = document.querySelector('form')
+            form.addEventListener('submit',async (e)=>{
+                e.preventDefault()
+
+                const title = form.title.value
+                const snippet = form.snippet.value
+                const body = form.body.value
+                const owner = form.owner.value
+
+                const res =await fetch('/blogs',{
+                    method:'POST',
+                    body: JSON.stringify({title, snippet, body, owner}),
+                    headers: {'Content-Type':'application/json'}
+                })
+                const data = await res.json()
+                if(data.blog){
+                    window.location.href='/blogs'
+                }else{
+                    console.log('Something is wrong')
+                }
+            })
+        </script>
+
+    </body>
+    <%- include('./partials/footer') %>
+
+</html>

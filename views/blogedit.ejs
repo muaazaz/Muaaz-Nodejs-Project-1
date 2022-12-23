@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header')%>
+<body>
+        <form>
+            <label for="title"><i class="arrow right"></i>Edit Title:</label>
+            <input type="text" name="title" id="title" value="<%= blog.title%>">
+            <label for="snippet"><i class="arrow right"></i>Edit Snippet:</label>
+            <input type="text" id="snippet" name="snippet" value="<%= blog.snippet%>">
+            <label for="body"><i class="arrow right"></i>Edit Body:</label>
+            <textarea name="body" id="body"><%= blog.body%></textarea>
+            <input type="text" hidden="true" name="owner" value="<%= user._id%>">
+            <button class="btn">Update</button>
+        </form>
+    
+    <script>
+        const form = document.querySelector('form')
+        form.addEventListener('submit',async(e)=>{
+            e.preventDefault()
+
+            const title = form.title.value
+            const snippet = form.snippet.value
+            const body = form.body.value
+            const res = await fetch('/edit/<%= blog._id%>',{
+                method:'PUT',
+                body: JSON.stringify({title, snippet,body }),
+                headers: {'Content-Type': 'application/json'}
+            })
+            const data = await res.json()
+            if(data.blog){
+                location.assign('/blogs/<%= blog._id%>')
+            }
+        })
+    </script>
+</body>
+<%- include('./partials/footer')%>
+</html>

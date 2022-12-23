@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header')%>
+<body>
+    <div class="contnt">
+        <h1 class="blg"><i class="symb right"></i>BLOGS:</h1>
+        <% if(blogs.length>0){ %>
+             <% blogs.forEach((blog)=>{ %> 
+                <a>
+                    <h1 class="title">
+                      Title: <%= blog.title%>
+                    </h1>
+                    <p class="snippet">
+                       Snippet: <%= blog.snippet%>
+                    </p>
+                    <h2 class="body">
+                        Body: <%= blog.body%>
+                    </h2>
+                    <% }) %>
+                </a>
+                <% } else{ %>
+                    <h1 class="not">There Are No Blogs To Show Yet!</h1>
+                <% } %>
+    </div>
+    
+</body>
+<%- include('./partials/footer')%>
+</html>

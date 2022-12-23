@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header')%>
+<body> 
+    <form>
+        <h1>Welcome You Can Change Your Email or Password Here!</h1>
+        <label for="email"><i class="arrow right"></i>Email:</label>
+        <input type="text" id="email" name="email" value="<%= user.email %>">
+        <label for="prevpass"><i class="arrow right"></i>Previous Password:</label>
+        <input type="password" id="prevpass" class="prevpass" name="prevpass" value="undefined">
+        <label for="password"><i class="arrow right"></i>Password:</label>
+        <input type="password" id="password" name="password" value="undefined">
+        <div class="error"></div>
+        <button class="btn">Update</button>
+    </form>
+
+    <script>
+        const form  = document.querySelector('form')
+        const error = document.querySelector('.error')
+        form.addEventListener('submit',async (e)=>{
+            e.preventDefault()
+
+            const email = form.email.value
+            const prevpass = form.prevpass.value
+            const password = form.password.value
+            error.textContent = ""
+
+            try {
+                const res = await fetch('/user/<%= user._id%>',{
+                method:'PUT',
+                body: JSON.stringify({email, prevpass, password}),
+                headers: {'Content-Type':'application/json'}
+            })
+            // const data = await res.json()
+            console.log('DOing greats')
+            await fetch('/logout',{
+                    method:'GET'
+                })
+                window.location.href='/'
+            } catch (e) {
+                console.log(e.message)
+            }
+           
+        })
+
+
+
+    </script>
+
+</body>
+<%- include('./partials/footer')%>
+</html>

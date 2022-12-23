@@ -1,0 +1,32 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= title %>
+    </title>
+    <link rel="icon" type="image/x-icon" href="/Blog.png">
+    <link rel="stylesheet" href="/style.css">
+    <a href="/" class="logo"><img src="/logo.png" alt=""></a>
+    <nav>
+       
+        <ul>
+            <% if(user){ %>
+                <li>
+                    <h1 class="wlcm">Welcome! : <%= user.email%>
+                    </h1>
+                </li>
+                <li><a href="/logout">Log Out</a></li>
+                <li><a href="/user/<%= user._id%>">Settings</a></li>
+                <li><a href="/create_blog">Create Blog</a></li>
+                <li><a href="/blogs">Show My Blogs</a></li>
+                <li><a href="/">Show ALL Blogs</a></li>
+                <% } else{ %>
+                    <li><a href="/login">Log In</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                    <li><a href="/about">About</a></li>
+                <% } %>
+        </ul>
+    </nav>
+</head>
