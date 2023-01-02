@@ -1,8 +1,7 @@
-const Blog = require('../models/blogs')
 const Blogs = require('../models/blogs')
 
 //Create blog page
-const Create_blog = (req, res) => {
+const create_blog = (req, res) => {
     res.render('crt_blog', { title: 'Create A Blog' })
 }
 
@@ -64,7 +63,7 @@ const edit_blog = async (req, res) => {
 }
 
 module.exports = {
-    Create_blog,
+    create_blog,
     post_blogs,
     get_blogs,
     get_a_blog,

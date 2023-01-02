@@ -6,7 +6,7 @@ const checkUser = require('../middleware/userCheck')
 const router = express.Router()
 
 
-router.get('/create_blog', auth, controller.Create_blog)
+router.get('/create_blog', auth, controller.create_blog)
 
 router.post('/blogs', auth, controller.post_blogs)
 

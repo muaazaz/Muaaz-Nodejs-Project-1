@@ -20,10 +20,11 @@ app.use(userRouter)
 
 app.set('view engine','ejs')
 
+const port = process.env.PORT || 3000
 
-mongoose.connect(process.env.dbUrl).then((res)=>{
-    app.listen(3000,()=>{
-        console.log('Server is up in running at port: 3000')
+mongoose.connect(process.env.DBURL).then((res)=>{
+    app.listen(port,()=>{
+        console.log('Server is up in running at port ' + port)
     })
   }).catch((e)=>{
     console.log(e)

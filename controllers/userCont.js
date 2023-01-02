@@ -3,38 +3,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const maxAge = 3*60*60
+
 const genToken = (id)=>{
-    return jwt.sign({id},process.env.secret,{
+    return jwt.sign({id},process.env.SECRET,{
         expiresIn: maxAge
     })
-}
-//Error handeling custom
-const errorhandling=(err)=>{
-
-    let errors = {email:'', password:''}
-
-    //Invaid user login
-    if(err.message === 'Email not found'){
-        errors.email = 'Invalid User Email';
-    }
-
-    if(err.message === 'Password incorrect'){
-        errors.password = 'Incorrect password';
-    }
-
-
-    if(err.code === 11000){
-        errors.email = 'That email is already taken'
-        return errors;
-    }
-
-
-    if(err.message.includes('Please Enter a valid email')){
-        Object.values(err.errors).forEach((error)=>{
-            errors[error.properties.path] = error.properties.message
-        })
-    }
-    return errors
 }
 
 const get_signup=(req, res)=>{
@@ -56,8 +29,7 @@ const post_signup=async (req, res)=>{
         })
         res.send({user})
     } catch (err) {
-        console.log(err)
-     const error = errorhandling(err)
+     const error = err.message
      res.send({error})   
     }
 }
@@ -69,8 +41,8 @@ const post_login=async (req, res)=>{
         res.cookie('jwt', token, {expiresIn: maxAge})
         res.send({user})
     }catch (err) {
-    const error = errorhandling(err)
-     res.send({error})   
+        const error = err.message
+        res.send({error}) 
     }
 }
 
