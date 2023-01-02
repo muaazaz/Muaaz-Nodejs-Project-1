@@ -6,22 +6,19 @@
         <form>
             <label for="email"><i class="arrow right"></i>Email:</label>
             <input type="text" id="email" name="email" placeholder="please enter an email">
-            <div class="email error"></div>
             <label for="password"><i class="arrow right"></i>Password:</label>
             <input type="password" id="password" name="password" placeholder="please enter a password">
-            <div class="password error"></div>
+            <div class="error"></div>
             <button class="btn">Sign Up</button>
         </form>
         <script>
             const form = document.querySelector('form')
-            const emailerror = document.querySelector('.email.error')
-            const passworderror = document.querySelector('.password.error')
-
+            const error = document.querySelector('.error')
+            
             form.addEventListener('submit',async (e) => {
                 e.preventDefault()
 
-                emailerror.textContent = ''
-                passworderror.textContent = ''
+                error.textContent = ''
 
                 const email = form.email.value
                 const password = form.password.value
@@ -37,8 +34,7 @@
                 if(data.user){
                     window.location.href = '/blogs'
                 }else{
-                    emailerror.textContent = data.error.email
-                    passworderror.textContent = data.error.password
+                    error.textContent = data.error
                 }
                     
                 } catch (error) {
